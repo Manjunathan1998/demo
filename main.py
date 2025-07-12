@@ -9,6 +9,5 @@ def main_function(user, phone_number):
 
 
 
-
 def main_2():
     pass
