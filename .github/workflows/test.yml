@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write  # ✅ Needed for git push to work
+  
 jobs:
   lint:
     runs-on: ubuntu-latest
