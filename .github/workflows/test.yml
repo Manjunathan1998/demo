@@ -40,9 +40,11 @@ jobs:
         run: |
           git config user.name "Manjunathan1998"
           git config user.email "manjunathsg407@gmail.com"
-          git pull --rebase origin ${{ github.head_ref }}
-          # Commit formatting changes first
           git add main.py
           git commit -m "🤖 Auto-format by Pylint fixer bot" || echo "No changes to commit"
-          # Push the updated commit back to the PR
-          git push origin HEAD:${{ github.head_ref }} || echo "⚠️ Push failed"
+
+          # Pull latest changes from the PR branch (rebased)
+          git pull --rebase origin ${{ github.head_ref }}
+
+          # Push the result back to the PR branch
+          git push origin HEAD:${{ github.head_ref }}
