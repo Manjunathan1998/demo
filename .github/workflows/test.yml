@@ -13,7 +13,7 @@ jobs:
 
         strategy:
             matrix:
-                python-version: [3:12]
+                python-version: [python-3.14.0-beta.4-darwin-arm64.tar.gz]
 
         env:
             MODE: "dev"
