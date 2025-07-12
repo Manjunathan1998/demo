@@ -1,10 +1,9 @@
 "Import modules"
 
-import os 
+import os
+import sys
+import time
 
-import time 
-
-import sys 
 
 def main_function(user, phone_number):
     """
@@ -14,12 +13,5 @@ def main_function(user, phone_number):
     return f"Hello {user} and your phone number is {phone_number}"
 
 
-
-
-
-
 def function_2():
     pass
-
-
-
