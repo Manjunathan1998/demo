@@ -1,4 +1,4 @@
-#Added a new comment a comment manju
+#Added a new comment a comment
 from main import main_function
 
 def test_main_function():
