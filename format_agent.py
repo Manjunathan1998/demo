@@ -1,31 +1,31 @@
-from openai import OpenAI
+import openai
 import os
 
-# Load API key from environment
+# Load API key securely
 api_key = os.getenv("OPENAI_API_KEY")
 if not api_key:
     raise RuntimeError("❌ OPENAI_API_KEY is missing!")
 
-# Init OpenAI client
-client = OpenAI(api_key=api_key)
+openai.api_key = api_key
 
-# Read the code
+# Read main.py code
 with open("main.py", "r") as f:
     code = f.read()
 
-# Call GPT-4 to refactor code
-response = client.chat.completions.create(
+# Ask GPT-4 to refactor the code
+response = openai.ChatCompletion.create(
     model="gpt-4",
     messages=[
-        {"role": "system", "content": "Refactor the Python code to improve Pylint score and follow PEP8."},
-        {"role": "user", "content": f"Refactor this code:\n\n{code}"}
+        {"role": "system", "content": "Refactor and reformat this Python code to follow PEP8 and improve Pylint score."},
+        {"role": "user", "content": code}
     ],
-    temperature=0.3
+    temperature=0.2
 )
 
-# Extract and overwrite main.py
-refactored_code = response.choices[0].message.content
+# Extract the refactored code
+refactored_code = response["choices"][0]["message"]["content"]
 
+# Overwrite main.py
 with open("main.py", "w") as f:
     f.write(refactored_code)
 
