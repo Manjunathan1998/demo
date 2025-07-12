@@ -1,27 +1,32 @@
-from openai import OpenAI
+import openai
 import os
 
-# Create a client using the new SDK format
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+# Load API key securely
+api_key = os.getenv("OPENAI_API_KEY")
+if not api_key:
+    raise RuntimeError("❌ OPENAI_API_KEY is missing!")
 
-# Get the content of main.py
+openai.api_key = api_key
+
+# Read the code from main.py
 with open("main.py", "r") as f:
     code = f.read()
 
-# Send request to GPT-4 (or use "gpt-3.5-turbo" if needed)
-response = client.chat.completions.create(
+# Call GPT-4 to refactor the code
+response = openai.chat.completions.create(
     model="gpt-4",
     messages=[
-        {"role": "system", "content": "You are a code refactoring agent. Improve Pylint score and follow PEP8."},
-        {"role": "user", "content": f"Refactor this code:\n\n{code}"}
+        {"role": "system", "content": "Refactor and reformat this Python code to follow PEP8 and improve Pylint score."},
+        {"role": "user", "content": code}
     ],
-    temperature=0.2
+    temperature=0.3
 )
 
-# Extract and save the improved code
+# Get the refactored code
 refactored_code = response.choices[0].message.content
 
+# Save the updated code
 with open("main.py", "w") as f:
     f.write(refactored_code)
 
-print("✅ Refactored code saved to main.py")
+print("✅ Code refactored and saved to main.py")
