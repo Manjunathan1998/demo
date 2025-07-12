@@ -41,6 +41,8 @@ jobs:
           git config user.name "Manjunathan1998"
           git config user.email "manjunathsg407@gmail.com"
           git pull --rebase origin ${{ github.head_ref }}
+          # Commit formatting changes first
           git add main.py
-          git commit -m "🤖 Auto-format by Pylint fixer bot"
-          git push origin HEAD:${{ github.head_ref }}
+          git commit -m "🤖 Auto-format by Pylint fixer bot" || echo "No changes to commit"
+          # Push the updated commit back to the PR
+          git push origin HEAD:${{ github.head_ref }} || echo "⚠️ Push failed"
