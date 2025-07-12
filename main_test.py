@@ -1,6 +1,8 @@
-#Added a new comment a comment manju
+#No Modules are imported
 from main import main_function
 
 def test_main_function():
-    #dummmy function 
+    """
+    Just test function added
+    """
     main_function("Manjunathan", 3.14)
